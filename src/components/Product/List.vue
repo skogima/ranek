@@ -1,31 +1,33 @@
 <template>
   <section class="products-container">
-    <div v-if="products && products.length" class="products">
-      <div v-for="product in products" :key="product.id" class="product">
-        <router-link to="/">
-          <img
-            v-if="product.fotos"
-            :src="product.fotos[0].src"
-            :alt="product.fotos[0].titulo"
-          />
-          <p class="price">{{ product.preco }}</p>
-          <h2 class="title">{{ product.nome }}</h2>
-          <p>{{ product.descricao }}</p>
-        </router-link>
+    <transition mode="out-in">
+      <div v-if="products && products.length" class="products" key="product-list">
+        <div v-for="product in products" :key="product.id" class="product">
+          <router-link to="/">
+            <img
+              v-if="product.fotos"
+              :src="product.fotos[0].src"
+              :alt="product.fotos[0].titulo"
+            />
+            <p class="price">{{ product.preco }}</p>
+            <h2 class="title">{{ product.nome }}</h2>
+            <p>{{ product.descricao }}</p>
+          </router-link>
+        </div>
+        <product-paginate
+          :total="totalProducts"
+          :itemsPerPage="productsPerPage"
+        />
       </div>
-      <product-paginate
-        :total="totalProducts"
-        :itemsPerPage="productsPerPage"
-      />
-    </div>
-    <div v-else-if="products && products.length === 0">
-      <p class="no-results">
-        A busca não encontrou resultados. Tente buscar outro termo.
-      </p>
-    </div>
-    <div v-else>
-      <page-loading />
-    </div>
+      <div v-else-if="products && products.length === 0" key="no-products">
+        <p class="no-results">
+          A busca não encontrou resultados. Tente buscar outro termo.
+        </p>
+      </div>
+      <div v-else key="loading-products">
+        <page-loading />
+      </div>
+    </transition>
   </section>
 </template>
 
