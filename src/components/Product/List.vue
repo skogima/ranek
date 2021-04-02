@@ -13,12 +13,18 @@
           <p>{{ product.descricao }}</p>
         </router-link>
       </div>
-      <product-paginate :total="totalProducts" :itemsPerPage="productsPerPage" />
+      <product-paginate
+        :total="totalProducts"
+        :itemsPerPage="productsPerPage"
+      />
     </div>
     <div v-else-if="products && products.length === 0">
       <p class="no-results">
         A busca não encontrou resultados. Tente buscar outro termo.
       </p>
+    </div>
+    <div v-else>
+      <page-loading />
     </div>
   </section>
 </template>
@@ -38,7 +44,7 @@ export default {
   data: () => ({
     products: null,
     totalProducts: 0,
-    productsPerPage: 1,
+    productsPerPage: 9,
   }),
 
   async created() {
@@ -47,10 +53,13 @@ export default {
 
   methods: {
     async fetchProducts() {
-      const response = await api.get(this.url);
-      const { data: products } = response;
-      this.totalProducts = Number(response.headers["x-total-count"]);
-      this.products = products;
+      this.products = null;
+      window.setTimeout(async () => {
+        const response = await api.get(this.url);
+        const { data: products } = response;
+        this.totalProducts = Number(response.headers["x-total-count"]);
+        this.products = products;
+      }, 1500);
     },
   },
 
