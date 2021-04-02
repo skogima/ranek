@@ -79,4 +79,24 @@ ul {
 main {
   flex: 1;
 }
+
+input, textarea {
+  font-size: 1rem;
+  font-family: "Avenir", Arial, Helvetica, sans-serif;
+  border-radius: 4px;
+  width: 100%;
+  border: 1px solid white;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
+  padding: 15px;
+  transition: all 0.3s;
+}
+
+input:hover,
+textarea:hover,
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
+  border-color: #87F;
+}
 </style>
