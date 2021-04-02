@@ -37,10 +37,9 @@ export default {
       const offset = Math.ceil(range / 2);
       const total = this.totalPages;
       const pagesArray = Array.from({ length: total }, (_, k) => k + 1);
-      
+
       pagesArray.splice(0, currentPage - offset);
       pagesArray.splice(range, total);
-        console.log(pagesArray);
       return pagesArray;
     },
 
