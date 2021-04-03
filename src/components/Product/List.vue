@@ -1,15 +1,19 @@
 <template>
   <section class="products-container">
     <transition mode="out-in">
-      <div v-if="products && products.length" class="products" key="product-list">
+      <div
+        v-if="products && products.length"
+        class="products"
+        key="product-list"
+      >
         <div v-for="product in products" :key="product.id" class="product">
-          <router-link to="/">
+          <router-link :to="{ name: 'Product', params: { id: product.id } }">
             <img
               v-if="product.fotos"
               :src="product.fotos[0].src"
               :alt="product.fotos[0].titulo"
             />
-            <p class="price">{{ product.preco }}</p>
+            <p class="price">{{ product.preco | currencyFilter }}</p>
             <h2 class="title">{{ product.nome }}</h2>
             <p>{{ product.descricao }}</p>
           </router-link>
