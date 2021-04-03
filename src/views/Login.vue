@@ -24,14 +24,15 @@ export default {
 
   methods: {
     login() {
-      console.log("oi");
+      this.$store.dispatch("user/fetchUser", this.email);
+      this.$router.push({ name: "User" });
     },
   },
 };
 </script>
 
 <style scoped>
-.login { 
+.login {
   max-width: 500px;
   margin: 0 auto;
   padding: 0 20px;
@@ -41,7 +42,7 @@ h1 {
   text-align: center;
   font-size: 2rem;
   margin-top: 40px;
-  color: #87F;
+  color: #87f;
 }
 
 form {
@@ -61,7 +62,7 @@ form {
 }
 
 .lost-password a:hover {
-  color: #87F;
+  color: #87f;
   text-decoration: underline;
 }
 </style>

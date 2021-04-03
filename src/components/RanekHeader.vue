@@ -4,7 +4,10 @@
       <router-link to="/" class="logo">
         <img src="@/assets/ranek.svg" alt="Ranek" />
       </router-link>
-      <router-link class="btn" to="/login">
+      <router-link class="btn" v-if="$store.getters['login/isLoggedIn']" to="/user">
+        {{ userName }}
+      </router-link>
+      <router-link v-else class="btn" to="/login">
         Vender / Login
       </router-link>
     </nav>
@@ -14,6 +17,12 @@
 <script>
 export default {
   name: "RanekHeader",
+
+  computed: {
+    userName() {
+      return this.$store.getters["user/getUser"].nome.replace(/ .*/, "");
+    },
+  },
 };
 </script>
 
