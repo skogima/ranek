@@ -55,7 +55,7 @@ export default {
 
         this.rua = data.logradouro;
         this.bairro = data.bairro;
-        this.cidade = data.cidade;
+        this.cidade = data.localidade;
         this.estado = data.uf;
       }
     },
