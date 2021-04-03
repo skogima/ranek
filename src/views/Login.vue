@@ -12,11 +12,19 @@
     <p class="lost-password">
       <a href="/" target="_blank">Perdeu a senha? Clique aqui</a>
     </p>
+
+    <create-account />
   </section>
 </template>
 
 <script>
+import CreateAccount from "@/components/CreateAccount.vue";
+
 export default {
+  components: {
+    CreateAccount,
+  },
+
   data: () => ({
     email: "",
     password: "",

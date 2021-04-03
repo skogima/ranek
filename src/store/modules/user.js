@@ -1,7 +1,18 @@
 import api from "@/services";
 
 export const state = {
-  user: {},
+  user: {
+    id: "",
+    email: "",
+    nome: "",
+    senha: "",
+    rua: "",
+    cep: "",
+    numero: "",
+    bairro: "",
+    estado: "",
+    cidade: "",
+  },
 };
 
 export const getters = {
@@ -21,7 +32,7 @@ export const actions = {
 
 export const mutations = {
   SET_USER(state, payload) {
-    state.user = payload;
+    state.user = Object.assign(state.user, payload);
   },
 };
 
