@@ -4,7 +4,13 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Product from "@/views/Product.vue";
+
 import User from "@/views/User";
+import UserProducts from "@/views/User/UserProducts";
+import UserPurchases from "@/views/User/UserPurchases";
+import UserSales from "@/views/User/UserSales";
+import UserEdit from "@/views/User/UserEdit";
+
 
 Vue.use(VueRouter);
 
@@ -21,8 +27,29 @@ const routes = [
   },
   {
     path: "/user",
-    name: "User",
     component: User,
+    children: [
+      {
+        path: "",
+        name: "User",
+        component: UserProducts,
+      },
+      {
+        path: "purchases",
+        name: "UserPurchases",
+        component: UserPurchases,
+      },
+      {
+        path: "sales",
+        name: "UserSales",
+        component: UserSales,
+      },
+      {
+        path: "edit",
+        name: "UserEdit",
+        component: UserEdit,
+      },
+    ],
   },
   {
     path: "/product/:id",
