@@ -2,7 +2,9 @@
   <div id="app">
     <ranek-header />
     <main>
-      <router-view class="view" />
+      <transition>
+        <router-view class="view" />
+      </transition>
     </main>
     <ranek-footer />
   </div>
@@ -80,15 +82,16 @@ main {
   flex: 1;
 }
 
-input, textarea {
+input,
+textarea {
   font-size: 1rem;
   font-family: "Avenir", Arial, Helvetica, sans-serif;
   border-radius: 4px;
-  width: 100%;
   border: 1px solid white;
   box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
   padding: 15px;
   transition: all 0.3s;
+  margin-bottom: 15px;
 }
 
 input:hover,
@@ -97,14 +100,16 @@ input:focus,
 textarea:focus {
   outline: none;
   box-shadow: 0 6px 12px rgba(30, 60, 90, 0.2);
-  border-color: #87F;
+  border-color: #87f;
 }
 
-.v-enter, .v-leave-to {
+.v-enter,
+.v-leave-to {
   opacity: 0;
 }
 
-.v-enter-active, .v-leave-active {
+.v-enter-active,
+.v-leave-active {
   transition: all 0.3s;
 }
 
@@ -114,5 +119,5 @@ textarea:focus {
 
 .v-leave-to {
   transform: translate3d(0, 20px, 0);
-} 
+}
 </style>
