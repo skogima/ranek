@@ -3,9 +3,11 @@
     <h2>Crie a sua conta</h2>
 
     <transition mode="out-in">
-      <button v-if="!create" class="btn" @click="create = true">Criar Conta</button>
+      <button v-if="!create" class="btn" @click="create = true">
+        Criar Conta
+      </button>
       <account-form v-else>
-        <button class="btn">
+        <button class="btn" @click.prevent="createAccount">
           Criar usuário
         </button>
       </account-form>
@@ -25,6 +27,20 @@ export default {
   data: () => ({
     create: false,
   }),
+
+  methods: {
+    async createAccount() {
+      await this.$store.dispatch(
+        "user/createUser",
+        this.$store.state["user"].user
+      );
+      await this.$store.dispatch(
+        "user/fetchUser",
+        this.$store.state["user"].user.email
+      );
+      this.$router.push({ name: "User" });
+    },
+  },
 };
 </script>
 

@@ -28,6 +28,27 @@ export const actions = {
     commit("SET_USER", user);
     commit("login/SET_LOGIN", true, { root: true });
   },
+
+  async createUser({ commit }, userPayload) {
+    commit("SET_USER", { id: userPayload.email });
+    await api.post("users", userPayload);
+  },
+
+  logout({ commit }) {
+    commit("SET_USER", {
+      id: "",
+      email: "",
+      nome: "",
+      senha: "",
+      rua: "",
+      cep: "",
+      numero: "",
+      bairro: "",
+      estado: "",
+      cidade: "",
+    });
+    commit("login/SET_LOGIN", false, { root: true });
+  },
 };
 
 export const mutations = {
