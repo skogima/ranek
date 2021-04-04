@@ -31,8 +31,8 @@ export default {
   }),
 
   methods: {
-    login() {
-      this.$store.dispatch("user/fetchUser", this.email);
+    async login() {
+      await this.$store.dispatch("user/fetchUser", this.email);
       this.$router.push({ name: "User" });
     },
   },
