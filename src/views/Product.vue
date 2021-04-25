@@ -10,9 +10,13 @@
         <h1>{{ product.nome }}</h1>
         <p class="price">{{ product.preco | currencyFilter }}</p>
         <p class="description">{{ product.descricao }}</p>
-        <button class="btn" :disabled="product.vendido === 'false'">
-          {{ product.vendido !== 'false' ? 'Produto Vendido' : 'Comprar' }}
-        </button>
+
+        <transition mode="out-in" v-if="product.vendido === 'false'">
+          <button class="btn" v-if="!showCheckoutForm" @click="displayCheckoutForm">
+            {{ product.vendido !== "false" ? "Produto Vendido" : "Comprar" }}
+          </button>
+          <checkout-form v-else :product="product" />
+        </transition>
       </div>
     </div>
     <page-loading v-else />
@@ -21,12 +25,18 @@
 
 <script>
 import api from "@/services";
+import CheckoutForm from "@/components/CheckoutForm.vue";
 
 export default {
   props: ["id"],
 
+  components: {
+    CheckoutForm,
+  },
+
   data: () => ({
     product: null,
+    showCheckoutForm: false,
   }),
 
   async created() {
@@ -37,6 +47,21 @@ export default {
     async getProduct() {
       const { data: product } = await api.get(`products/${this.id}`);
       this.product = product;
+    },
+
+    displayCheckoutForm() {
+      const isLoggedIn = this.$store.getters['login/isLoggedIn'];
+      
+      if (!isLoggedIn) {
+        this.$router.push({
+          name: 'Login',
+          query: {
+            continue: this.$route.fullPath
+          },
+        });
+      }
+
+      this.showCheckoutForm = isLoggedIn;
     },
   },
 };

@@ -1,11 +1,13 @@
 <template>
   <form>
-    <label for="name">Nome</label>
-    <input id="name" name="name" type="text" v-model="nome" />
-    <label for="email">Email</label>
-    <input id="email" name="email" type="email" v-model="email" />
-    <label for="password">Senha</label>
-    <input id="passoword" name="passoword" type="password" v-model="senha" />
+    <template v-if="showLoginData">
+      <label for="name">Nome</label>
+      <input id="name" name="name" type="text" v-model="nome" />
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" v-model="email" />
+      <label for="password">Senha</label>
+      <input id="passoword" name="passoword" type="password" v-model="senha" />
+    </template>
     <label for="cep">Cep</label>
     <input id="cep" name="cep" type="text" v-model="cep" @keyup="fillCep" />
     <label for="street">Rua</label>
@@ -45,11 +47,18 @@ export default {
       base: "user/getUser",
       mutation: "user/SET_USER",
     }),
+
+    showLoginData() {
+      return (
+        !this.$store.getters["login/isLoggedIn"] ||
+        this.$route.name === "UserEdit"
+      );
+    },
   },
 
   methods: {
     async fillCep() {
-      const cep = this.cep.replace(/\D/g, ""); 
+      const cep = this.cep.replace(/\D/g, "");
       if (cep.length === 8) {
         const { data } = await fetchCep(cep);
 
@@ -59,7 +68,7 @@ export default {
         this.estado = data.uf;
       }
     },
-  }
+  },
 };
 </script>
 

@@ -30,6 +30,8 @@ export default {
 
   methods: {
     async createAccount() {
+      const continueWith = this.$route.query.continue;
+
       await this.$store.dispatch(
         "user/createUser",
         this.$store.state["user"].user
@@ -38,7 +40,12 @@ export default {
         "user/fetchUser",
         this.$store.state["user"].user.email
       );
-      this.$router.push({ name: "User" });
+
+      if (!continueWith) {
+        this.$router.push({ name: "User" });
+      }
+
+      this.$router.push({ path: continueWith });
     },
   },
 };
