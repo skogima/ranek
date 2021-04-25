@@ -32,8 +32,15 @@ export default {
 
   methods: {
     async login() {
+      const continueWith = this.$route.query.continue;
+
       await this.$store.dispatch("user/fetchUser", this.email);
-      this.$router.push({ name: "User" });
+      
+      if (!continueWith) {
+        this.$router.push({ name: "User" });
+      }
+
+      this.$router.push({ path: continueWith });
     },
   },
 };
