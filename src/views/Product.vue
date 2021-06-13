@@ -92,4 +92,18 @@ export default {
   margin-top: 60px;
   width: 200px;
 }
+
+img {
+  max-width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgb(30 60 90 / 20%);
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: 500px) {
+  .product {
+    display: flex;
+    flex-direction: column-reverse;   
+  }
+}
 </style>
