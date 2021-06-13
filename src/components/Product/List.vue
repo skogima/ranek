@@ -128,4 +128,8 @@ export default {
 .no-results {
   text-align: center;
 }
+
+img {
+  width: 100%;
+}
 </style>
